@@ -1,3 +1,4 @@
+import 'package:exchange_rates/utils/get_exchange_data.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widgets.dart';
 
@@ -22,12 +23,20 @@ class _ExcahgeListScreanState extends State<ExcahgeListScrean> {
       ),
       body: ListView.separated(
           itemCount: 20,
-          separatorBuilder: (context, index) => const Divider(),
+          separatorBuilder: (context, index) => const Divider(thickness: 2),
           itemBuilder: (context, index) {
             return CoinTile(
               index: index,
             );
           }),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            GetExchangeData().getCoinstList('1');
+          },
+          child: const Icon(
+            Icons.refresh,
+            size: 40,
+          )),
     );
   }
 }

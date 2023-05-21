@@ -7,7 +7,6 @@ final darkTheme = ThemeData(
       iconTheme: IconThemeData(color: Colors.white)),
   scaffoldBackgroundColor: const Color.fromARGB(255, 34, 41, 61),
   primarySwatch: Colors.yellow,
-  dividerTheme: const DividerThemeData(color: Colors.white12, space: 1),
   listTileTheme: const ListTileThemeData(
       iconColor: Colors.white,
       contentPadding: EdgeInsets.only(left: 20, right: 20)),

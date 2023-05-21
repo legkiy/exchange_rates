@@ -17,6 +17,12 @@ class _ExcahgeListScreanState extends State<ExcahgeListScrean> {
   List<CoinDataListInterface>? _coinsList;
 
   @override
+  void initState() {
+    _loadCoins();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -37,13 +43,17 @@ class _ExcahgeListScreanState extends State<ExcahgeListScrean> {
               }),
       floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            _coinsList = await GetExchangeData().getCoinstList('USD');
-            setState(() {});
+            await _loadCoins();
           },
           child: const Icon(
             Icons.refresh,
             size: 40,
           )),
     );
+  }
+
+  Future<void> _loadCoins() async {
+    _coinsList = await GetExchangeData().getCoinstList('EUR');
+    setState(() {});
   }
 }

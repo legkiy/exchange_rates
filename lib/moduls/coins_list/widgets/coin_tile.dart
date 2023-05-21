@@ -34,7 +34,7 @@ class CoinTile extends StatelessWidget {
         style: textBody,
       ),
       subtitle: Text(
-        'coast: ${coin.price.toStringAsFixed(2)} \$',
+        'coast: ${coin.price.toStringAsFixed(4)} ${coin.name}',
         style: subtitlText,
       ),
       trailing: const Icon(

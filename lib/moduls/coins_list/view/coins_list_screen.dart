@@ -1,4 +1,5 @@
 import 'package:exchange_rates/utils/get_exchange_data.dart';
+import 'package:exchange_rates/utils/interfaces/coin_data_list.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widgets.dart';
 
@@ -13,6 +14,7 @@ class ExcahgeListScrean extends StatefulWidget {
 
 class _ExcahgeListScreanState extends State<ExcahgeListScrean> {
   int activeIndex = -1;
+  List<CoinDataListInterface>? _coinsList;
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +23,22 @@ class _ExcahgeListScreanState extends State<ExcahgeListScrean> {
         centerTitle: true,
         title: const Text('Exchange Rates'),
       ),
-      body: ListView.separated(
-          itemCount: 20,
-          separatorBuilder: (context, index) => const Divider(thickness: 2),
-          itemBuilder: (context, index) {
-            return CoinTile(
-              index: index,
-            );
-          }),
+      body: _coinsList == null
+          ? const SizedBox()
+          : ListView.separated(
+              padding: const EdgeInsets.only(top: 20),
+              itemCount: _coinsList!.length,
+              separatorBuilder: (context, index) => const Divider(thickness: 2),
+              itemBuilder: (context, index) {
+                final coin = _coinsList![index];
+                return CoinTile(
+                  coin: coin,
+                );
+              }),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            GetExchangeData().getCoinstList('1');
+          onPressed: () async {
+            _coinsList = await GetExchangeData().getCoinstList('USD');
+            setState(() {});
           },
           child: const Icon(
             Icons.refresh,
